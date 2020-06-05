@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Facts</title>
+  <!--<link rel="stylesheet" href="style.css">-->
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="url_for('static', filename='style.css')">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
+  <style>
+    th, td {
+      text-align: left;
+      padding: 10px;
+    }
+    body {
+    font-family: 'Work Sans';
+    font-size: 14px;
+    }
+    .jumbotron h1 {
+    font-size: 100px; /* makes the font fantastically huge */
+    }   
+  </style>
+</head>
+
+<body>
+
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1><b>Mission to Mars</b></h1>
+      <br>
+      <p class="lead"><em>Click below for new voyage information!</em></p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Re-launch</a></p>
+    </div>
+  </div>
+  <!----------Latest News Sections-------------->
+  <!------------->
+  <div class="container" id="mars-news">
+    <div class="card">
+      <h2>Latest Mars News</h2>
+      <hr>
+      <div class="row">
+        <div class="col-sm-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="heading"> {{voyage_data.news_title}}</h3>
+              <p>{{voyage_data.news_preview}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!----------Featured image-------------->
+  <div class="container">
+    <h2>Featured Mars Image</h2>
+    <hr>
+    <div class="row" id="info">
+      <div class="col-md-8 mb-4">
+        <div class="card">
+          <br>
+          <img class="img-fluid" src="{{voyage_data.featured_image_url}}" alt="feature_image" width="620" height="500">
+        </div>
+        <p></p>
+      </div>
+      <!----------Twitter Weather-------------->
+      <div class="col-md-4">
+        <div class="card border-dark mb-3">
+          <div class="card-header">
+            <h3>Current Weather on Mars</h3>
+          </div>
+          <hr>
+          <div class="card-body">
+            <p>{{voyage_data.mars_weather}}</p>
+          </div>
+        </div>
+        <p></p>
+        <!----------Mars Table-------------->
+        <div class="card border-light mb-4">
+          <div class="card-header">
+            <h3>Mars Facts</h3>
+          </div>
+          <hr>
+          <div class="card-table table">
+            <p>{{voyage_data.mars_facts |safe}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center" id='hemisphere-images'>
+    <div class="section-header">
+      <h1 class="display-1">Mars Hemispheres</h1>
+      <hr>
+    </div>
+  </div>
+  <div class="container">
+
+    <div class="row row-cols-6" id="info-2">
+      {% for item in voyage_data.hemispheres %}
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-image">
+            <img class="img" src="{{item.img_url}}" alt="hemispheres" width="400" height="400">
+            <hr>
+            <div class="card-body">
+              <span class="card-title text-align" id="hemisphere-titles">
+                <h4>{{item.title}}</h4>
+              </span>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</body>
+<link rel="stylesheet" href="style.css">
+
+</html>
